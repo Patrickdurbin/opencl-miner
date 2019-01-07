@@ -1,4 +1,4 @@
-# Beam Equihash 150/5 OpenCL Miner
+# Custom Beam Equihash 150/5 OpenCL Miner
 
 ```
 Copyright 2018 The Beam Team
