@@ -84,7 +84,7 @@ void beamStratum::connect() {
 		io_service.reset();
 		socket->lowest_layer().close();
 
-		cout << "Lost connection to BEAM stratum server" << endl;
+		cout << "Internet Connection Flaky" << endl;
 		cout << "Trying to connect in 5 seconds"<< endl;
 
 		std::this_thread::sleep_for(std::chrono::seconds(5));
@@ -95,7 +95,7 @@ void beamStratum::connect() {
 // Once the physical connection is there start a TLS handshake
 void beamStratum::handleConnect(const boost::system::error_code& err, tcp::resolver::iterator endpoint_iterator) {
 	if (!err) {
-	cout << "Connected to node. Starting TLS handshake." << endl;
+	cout << "Connected to node. Discussing how much work your card can handle!." << endl;
 
       	// The connection was successful. Do the TLS handshake
 	socket->async_handshake(boost::asio::ssl::stream_base::client,boost::bind(&beamStratum::handleHandshake, this, boost::asio::placeholders::error));
@@ -125,14 +125,14 @@ void beamStratum::handleHandshake(const boost::system::error_code& error) {
 		boost::asio::async_read_until(*socket, responseBuffer, "\n",
 		boost::bind(&beamStratum::readStratum, this, boost::asio::placeholders::error));
 
-		cout << "TLS Handshake sucess" << endl;
+		cout << "Downloading Work" << endl;
 		
 		// The connection was successful. Send the login request
 		std::stringstream json;
 		json << "{\"method\":\"login\", \"api_key\":\"" << apiKey << "\", \"id\":\"login\",\"jsonrpc\":\"2.0\"} \n";
 		queueDataSend(json.str());	
 	} else {
-		cout << "Handshake failed: " << error.message() << "\n";
+		cout << "Server kicked you out!: " << error.message() << "\n";
 	}
 }
 
@@ -191,9 +191,9 @@ void beamStratum::readStratum(const boost::system::error_code& err) {
 					} else {	// A share reply
 						int32_t code = jsonTree.get<int32_t>("code");
 						if (code == 1) {
-							cout << "Solution for work id " << jsonTree.get<string>("id") << "accepted" << endl;
+							cout << "Hash Solution " << jsonTree.get<string>("id") << "Accepted" << endl;
 						} else {
-							cout << "Warning: Solution for work id " << jsonTree.get<string>("id") << "not accepted" << endl;
+							cout << "Hash Solution" << jsonTree.get<string>("id") << "Wasnt Accepted" << endl;
 						}
 					}
 				}
@@ -213,7 +213,7 @@ void beamStratum::readStratum(const boost::system::error_code& err) {
 					powDiff = beam::Difficulty(stratDiff);
 					updateMutex.unlock();	
 
-					cout << "New work received with id " << workId << " at difficulty " << std::fixed << std::setprecision(0) << powDiff.ToFloat() << endl;	
+					cout << "Downloading Hash to compute" << workId << " with a difficulty of " << std::fixed << std::setprecision(0) << powDiff.ToFloat() << endl;	
 				}
 
 				// Cancel a running job
