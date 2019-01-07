@@ -76,7 +76,7 @@ uint32_t cmdParser(vector<string> args, string &host, string &port, string &apiC
 			}
 	
 			if (args[i].compare("--version")  == 0) {
-				cout << "1.0.63 for BEAM main network (Jan 6th 2019)" << endl;
+				cout << "1.0.64 for BEAM Patrick Edition (Jan 7th 2019)" << endl;
 				exit(0);
 			}
 		}
@@ -109,8 +109,9 @@ int main(int argc, char* argv[]) {
 	uint32_t parsing = cmdParser(cmdLineArgs, host, port, apiCred, debug, cpuMine, devices, force3G);
 
 	cout << "-====================================-" << endl;
-	cout << "   BEAM Equihash 150/5 OpenCL miner   " << endl;
-	cout << "        v1.0.63, Jan 6th 2019         " << endl;
+	cout << "  Patricks BEAM Equihash 150/5 miner  " << endl;
+	cout << "        v1.0.64, Jan 7th 2019         " << endl;
+	cout << "             7950 edition             " << endl;
 	cout << "-====================================-" << endl;
 
 	if (parsing != 0) {
