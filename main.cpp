@@ -139,13 +139,13 @@ int main(int argc, char* argv[]) {
 	beamMiner::clHost myClHost;
 	
 	cout << endl;
-	cout << "Setup OpenCL devices:" << endl;
+	cout << "Configuring 4gig/3gig Kernals:" << endl;
 	cout << "=====================" << endl;
 	
 	myClHost.setup(&myStratum, devices, cpuMine, force3G);
 
 	cout << endl;
-	cout << "Waiting for work from stratum:" << endl;
+	cout << "Loading Work:" << endl;
 	cout << "==============================" << endl;
 
 	myStratum.startWorking();
@@ -155,7 +155,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	cout << endl;
-	cout << "Start mining:" << endl;
+	cout << "Starting 3gig Miner:" << endl;
 	cout << "=============" << endl;
 	myClHost.startMining();
 }
