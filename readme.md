@@ -1,4 +1,4 @@
-# Custom Beam Equihash 150/5 OpenCL Miner
+# Custom 3gig Beam Equihash 150/5 OpenCL Miner (forked to learn to program)
 
 ```
 Copyright 2018 The Beam Team
